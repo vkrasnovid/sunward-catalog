@@ -229,7 +229,15 @@
       img.addEventListener('error', () => {
         img.style.display = 'none';
         const skeleton = img.parentElement.querySelector('.skeleton');
-        if (skeleton) skeleton.style.animation = 'none';
+        if (skeleton) skeleton.remove();
+        const wrap = img.parentElement;
+        if (!wrap.querySelector('.card__img-placeholder')) {
+          const ph = document.createElement('div');
+          ph.className = 'card__img-placeholder';
+          ph.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);font-size:.85rem;text-align:center;padding:16px;';
+          ph.innerHTML = '<span>Изображение<br>недоступно</span>';
+          wrap.appendChild(ph);
+        }
       });
     });
   }
